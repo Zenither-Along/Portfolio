@@ -24,7 +24,7 @@ export default function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef<Mouse>({ x: null, y: null, radius: 150 });
-  const animationIdRef = useRef<number>();
+  const animationIdRef = useRef<number>(0);
 
   const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
 
@@ -167,7 +167,7 @@ export default function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full h-full z-[1]"
+      className="absolute top-0 left-0 w-full h-full z-1"
     />
   );
 }

@@ -44,15 +44,37 @@ export default function HeroContent() {
             style={{ objectPosition: 'center 25%' }}
           />
         </span>
-        <span style={{ fontFamily: 'var(--font-playfair)' }} className="italic font-normal relative top-[2px] md:top-[4px]">
+        <span 
+          style={{ fontFamily: 'var(--font-playfair)' }} 
+          className="italic font-normal relative top-[2px] md:top-[4px] text-gray-900"
+        >
           Alongbar
+          {/* Animated Sparkle */}
+          <span className="absolute -top-2 -right-6 w-5 h-5 inline-flex">
+             <motion.svg
+               viewBox="0 0 24 24" 
+               fill="none" 
+               xmlns="http://www.w3.org/2000/svg"
+               className="w-full h-full text-purple-500"
+               animate={{ 
+                 rotate: 360,
+                 scale: [1, 1.2, 1]
+               }}
+               transition={{ 
+                 rotate: { duration: 4, repeat: Infinity, ease: "linear" },
+                 scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+               }}
+             >
+               <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" fill="currentColor" />
+             </motion.svg>
+          </span>
         </span>
       </span>
       <br />
       <span style={{ fontFamily: 'var(--font-instrument)' }} className="font-medium">
         — I build things for the{' '}
       </span>
-      <span style={{ fontFamily: 'var(--font-playfair)' }} className="italic font-normal">
+      <span style={{ fontFamily: 'var(--font-playfair)' }} className="italic font-normal text-gray-900">
         web
       </span>
     </motion.h1>

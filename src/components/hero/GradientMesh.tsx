@@ -1,118 +1,84 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-
 export default function GradientMesh() {
-  const meshRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!meshRef.current) return;
-      
-      const rect = meshRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      
-      setMousePos({ x, y });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <div 
-      ref={meshRef}
-      className="absolute inset-0 overflow-hidden"
-      style={{
-        background: '#F3F4F6',
-      }}
-    >
-      {/* Gradient Orbs */}
-      <div
-        className="absolute w-[800px] h-[800px] rounded-full blur-3xl opacity-30 animate-float-slow"
-        style={{
-          background: 'radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%)',
-          top: '10%',
-          left: '10%',
-          animation: 'float-slow 20s ease-in-out infinite',
-        }}
-      />
-      
-      <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-3xl opacity-25 animate-float-medium"
-        style={{
-          background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)',
-          top: '40%',
-          right: '10%',
-          animation: 'float-medium 15s ease-in-out infinite',
-        }}
-      />
-      
-      <div
-        className="absolute w-[700px] h-[700px] rounded-full blur-3xl opacity-20 animate-float-fast"
-        style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%)',
-          bottom: '10%',
-          left: '30%',
-          animation: 'float-fast 12s ease-in-out infinite',
-        }}
-      />
+    <div className="absolute inset-0 overflow-hidden -z-10 pointer-events-none bg-gray-50">
+      {/* Left Side Windmill with Stand */}
+      <div className="hidden md:block absolute left-[15%] bottom-[5%] opacity-90">
+        <div className="relative">
+          {/* The Stand (Pole) */}
+          <div className="w-1.5 h-[350px] bg-linear-to-t from-gray-200 to-gray-400 rounded-full mx-auto" />
+          
+          {/* The Rotating Head */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] animate-spin-smooth-reverse">
+             <div className="absolute inset-0">
+               {/* Blade 1 */}
+               <div className="absolute top-1/2 left-1/2 w-full h-[30px] -translate-y-1/2 -translate-x-1/2 rotate-0">
+                  <div className="w-1/2 h-full bg-linear-to-r from-transparent to-cyan-400 rounded-r-full ml-auto opacity-80" />
+               </div>
+               {/* Blade 2 */}
+               <div className="absolute top-1/2 left-1/2 w-full h-[30px] -translate-y-1/2 -translate-x-1/2 rotate-90">
+                  <div className="w-1/2 h-full bg-linear-to-r from-transparent to-purple-400 rounded-r-full ml-auto opacity-80" />
+               </div>
+               {/* Blade 3 */}
+               <div className="absolute top-1/2 left-1/2 w-full h-[30px] -translate-y-1/2 -translate-x-1/2 rotate-180">
+                   <div className="w-1/2 h-full bg-linear-to-r from-transparent to-pink-400 rounded-r-full ml-auto opacity-80" />
+               </div>
+               {/* Blade 4 */}
+               <div className="absolute top-1/2 left-1/2 w-full h-[30px] -translate-y-1/2 -translate-x-1/2 rotate-270">
+                   <div className="w-1/2 h-full bg-linear-to-r from-transparent to-indigo-400 rounded-r-full ml-auto opacity-80" />
+               </div>
+               
+               {/* Center Cap */}
+               <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 shadow-sm z-10" />
+             </div>
+          </div>
+        </div>
+      </div>
 
-      {/* Mouse-following spotlight */}
-      <div
-        className="absolute w-[500px] h-[500px] rounded-full blur-3xl opacity-20 transition-all duration-300 ease-out pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, transparent 70%)',
-          left: `calc(${mousePos.x}% - 250px)`,
-          top: `calc(${mousePos.y}% - 250px)`,
-        }}
-      />
-
-      {/* Noise texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* GSAP-style Gradient Pinwheel (Right Side) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:translate-y-0 md:right-[5%] md:top-[10%] md:bottom-auto md:left-auto opacity-90">
+        <div className="relative w-[300px] h-[300px] animate-spin-smooth">
+          {/* Petal Container */}
+          <div className="absolute inset-0">
+             {/* Petal 1 - Top Left (Sharp SE corner at center) */}
+             <div className="absolute top-0 left-0 w-[150px] h-[150px] bg-gradient-to-br from-pink-300 to-purple-400 rounded-tr-[100px] rounded-bl-[100px] shadow-lg" />
+             
+             {/* Petal 2 - Top Right (Sharp SW corner at center) */}
+             <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-gradient-to-bl from-purple-400 to-indigo-400 rounded-tl-[100px] rounded-br-[100px] shadow-lg" />
+             
+             {/* Petal 3 - Bottom Left (Sharp NE corner at center) */}
+             <div className="absolute bottom-0 left-0 w-[150px] h-[150px] bg-gradient-to-tr from-cyan-400 to-blue-400 rounded-tl-[100px] rounded-br-[100px] shadow-lg" />
+             
+             {/* Petal 4 - Bottom Right (Sharp NW corner at center) */}
+             <div className="absolute bottom-0 right-0 w-[150px] h-[150px] bg-gradient-to-tl from-indigo-400 to-cyan-300 rounded-tr-[100px] rounded-bl-[100px] shadow-lg" />
+          </div>
+        </div>
+      </div>
 
       <style jsx>{`
-        @keyframes float-slow {
-          0%, 100% {
-            transform: translate(0, 0) scale(1);
+        @keyframes spin-smooth {
+          0% {
+            transform: rotate(0deg);
           }
-          33% {
-            transform: translate(30px, -30px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
+          100% {
+            transform: rotate(360deg);
           }
         }
-
-        @keyframes float-medium {
-          0%, 100% {
-            transform: translate(0, 0) scale(1);
+        .animate-spin-smooth {
+          animation: spin-smooth 30s linear infinite;
+        }
+        
+        @keyframes spin-smooth-reverse {
+          0% {
+            transform: rotate(0deg);
           }
-          50% {
-            transform: translate(-40px, 40px) scale(1.15);
+          100% {
+            transform: rotate(-360deg);
           }
         }
-
-        @keyframes float-fast {
-          0%, 100% {
-            transform: translate(0, 0) scale(1);
-          }
-          25% {
-            transform: translate(20px, -20px) scale(0.95);
-          }
-          50% {
-            transform: translate(-30px, 30px) scale(1.1);
-          }
-          75% {
-            transform: translate(10px, 10px) scale(1.05);
-          }
+        .animate-spin-smooth-reverse {
+          animation: spin-smooth-reverse 25s linear infinite;
         }
       `}</style>
     </div>
