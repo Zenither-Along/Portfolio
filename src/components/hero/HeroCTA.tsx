@@ -26,11 +26,13 @@ export default function HeroCTA({
   return (
     <motion.a
       href={href}
+      initial="hidden"
+      animate="visible"
       variants={itemVariants}
       className="group inline-flex items-center gap-2 bg-gray-900 text-white border-2 border-gray-900 rounded-full font-medium text-lg transition-all duration-300 hover:bg-white hover:text-gray-900"
       style={{ 
         fontFamily: 'var(--font-instrument)',
-        padding: '12px 24px',
+        padding: '10px 20px',
         gap: '12px'
       }}
       whileHover={{ scale: 1.02 }}

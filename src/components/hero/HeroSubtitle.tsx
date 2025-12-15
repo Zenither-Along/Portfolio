@@ -7,7 +7,7 @@ interface HeroSubtitleProps {
 }
 
 export default function HeroSubtitle({ 
-  text = "I focus on clean code, thoughtful design, and building experiences that feel both intuitive and delightful."
+  text = "I craft elegant, performant web experiences that delight users and inspire creativity - along___br"
 }: HeroSubtitleProps) {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -23,11 +23,13 @@ export default function HeroSubtitle({
 
   return (
     <motion.p
+      initial="hidden"
+      animate="visible"
       variants={itemVariants}
-      className="text-lg md:text-xl text-gray-500 max-w-2xl leading-relaxed text-center"
+      className="text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed text-center"
       style={{ 
         fontFamily: 'var(--font-instrument)',
-        marginBottom: '44px'
+        marginBottom: '36px'
       }}
     >
       {text}
