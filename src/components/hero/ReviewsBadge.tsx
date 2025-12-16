@@ -18,7 +18,7 @@ export default function StatusBadge() {
         {/* Border beam effect */}
         <BorderBeam 
           size={140}
-          duration={12}
+          duration={8}
           colorFrom="#60A5FA"
           colorTo="#3B82F6"
           borderThickness={2}

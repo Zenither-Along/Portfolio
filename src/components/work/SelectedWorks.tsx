@@ -1,160 +1,129 @@
 'use client';
 
-import { useState, useLayoutEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
+import RuledPaperBackground from '@/components/work/RuledPaperBackground';
+import EdgeFade from '@/components/work/EdgeFade';
+import ProjectCard from '@/components/work/ProjectCard';
 
 const projects = [
   {
-    id: 1,
-    title: "Revitalizing Customer Engagement for FluxCRM",
-    category: "CRM / UX Redesign",
-    image: "/project-1.jpg", 
-    color: "bg-orange-500",
-    link: "#"
-  },
-  {
-    id: 2,
-    title: "Streamlining E-Commerce for ZenithCart",
-    category: "E-Commerce / Platform",
-    image: "/project-2.jpg", 
-    color: "bg-zinc-800",
-    link: "#"
-  },
-  {
-    id: 3,
-    title: "Designing a Seamless User Experience for TaskFlow",
-    category: "Productivity / SaaS",
-    image: "/project-3.jpg",
-    color: "bg-amber-600",
-    link: "#"
-  },
-  {
     id: 4,
-    title: "Revamping the Digital Experience for NexaTech",
+    title: "The Silent Witch",
     category: "Corporate / Branding",
-    image: "/project-4.jpg",
-    color: "bg-slate-700",
+    image: "/test-image.jpg",
+    tapeColors: { topLeft: '#F97316', topRight: '#F97316' }, // Orange
+    pillColor: '#50ff50', // Neon Green from reference
+    rotation: 2.2, // No rotation for focused editing? Or keep a slight one? Let's keep 0 for clarity now, or reference had 2.5. Let's do 0 to start perfectly straight.
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "Kotion Perfume",
+    category: "Product Design",
+    image: "/test-image.jpg", // Using same test image for now
+    tapeColors: { topLeft: '#A855F7', topRight: '#A855F7' }, // Purple
+    pillColor: '#94deff', // Light Blue
+    rotation: -3,
+    link: "#"
+  },
+  {
+    id: 6,
+    title: "Urban Architecture",
+    category: "Photography",
+    image: "/test-image.jpg",
+    tapeColors: { topLeft: '#3B82F6', topRight: '#3B82F6' }, // Blue
+    pillColor: '#ffd9b6', // Peach
+    rotation: 2.2,
+    link: "#"
+  },
+  {
+    id: 7,
+    title: "Geometric Shapes",
+    category: "3D Art",
+    image: "/test-image.jpg",
+    tapeColors: { topLeft: '#EF4444', topRight: '#EF4444' }, // Red
+    pillColor: '#e0e0e0', // Gray
+    rotation: -2.3,
     link: "#"
   }
 ];
 
 export default function SelectedWorks() {
-  const [view, setView] = useState<'grid' | 'list'>('grid');
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Ensure any previous animations are killed
-      gsap.killTweensOf(".project-card");
-      
-      // Animate from hidden state to natural state
-      // This is safer than .set() + .to() as it respects the element's layout
       gsap.from(".project-card", {
-        y: 50,
+        y: 15,
+        scale: 1.05,
+        rotation: 0, // Start straight, then tilt to final angle
         opacity: 0,
         duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        clearProps: "all" 
+        stagger: 0.2,
+        ease: "back.out(1.2)", // "Place down" feel
+        clearProps: "transform, opacity, scale, y" 
       });
     }, containerRef);
-
     return () => ctx.revert();
-  }, [view]);
+  }, []);
 
   return (
     <section 
-      className="py-2 px-4 md:px-8 bg-white relative z-10 w-full rounded-t-[3rem]"
-      style={{ paddingTop: '25px' }}
+      className="py-2 px-8 md:px-12 bg-white relative z-10 w-full rounded-t-[3rem] overflow-hidden"
+      style={{ 
+        paddingTop: '40px',
+        paddingBottom: '100px',
+        minHeight: '800px', 
+      }}
     >
+      {/* Ruled paper background */}
+      <RuledPaperBackground />
+      {/* Edge fade overlay for soft side transitions */}
+      <EdgeFade />
       <div 
-        className="max-w-7xl mx-auto"
+        className="max-w-7xl mx-auto relative z-10 flex flex-col items-center" 
         style={{ width: '100%', maxWidth: '1100px', margin: '0 auto' }}
       >
         {/* Header Row */}
         <div 
-          className="flex justify-between items-end mb-12"
-          style={{ marginBottom: '35px' }}
+          className="w-full flex flex-col items-start mb-12"
+          style={{ paddingLeft: '20px', paddingRight: '20px' }}
         >
-          <h3 className="text-3xl md:text-4xl font-serif text-gray-900">Featured Projects</h3>
-          
-          {/* View Toggle */}
-          <div className="hidden md:flex gap-2 bg-gray-100 p-1.5 rounded-xl items-center">
-             <button 
-               onClick={() => setView('grid')}
-               className={`p-2.5 rounded-lg transition-all duration-300 ${view === 'grid' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
-               aria-label="Grid View"
-             >
-                {/* Custom Filled Grid Icon */}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 3H3V10H10V3Z" />
-                  <path d="M21 3H14V10H21V3Z" />
-                  <path d="M21 14H14V21H21V14Z" />
-                  <path d="M10 14H3V21H10V14Z" />
-                </svg>
-             </button>
-             <button 
-               onClick={() => setView('list')}
-               className={`p-2.5 rounded-lg transition-all duration-300 ${view === 'list' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-400 hover:text-gray-600'}`}
-               aria-label="List View"
-             >
-                {/* Custom List with Bullets Icon */}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="8" y1="6" x2="21" y2="6"/>
-                  <line x1="8" y1="12" x2="21" y2="12"/>
-                  <line x1="8" y1="18" x2="21" y2="18"/>
-                  <path d="M3 6h.01M3 12h.01M3 18h.01" strokeWidth="3.5" />
-                </svg>
-             </button>
-          </div>
+          <h3 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">Featured Projects</h3>
+          <p className="text-gray-600 text-lg md:text-xl font-sans max-w-2xl">
+            A curated selection of projects that showcase my passion for design, development, and storytelling.
+          </p>
         </div>
 
-        {/* Dynamic Grid/List Container */}
+        {/* Projects List - Vertical Stack with Staggered Alignment */}
         <div 
           ref={containerRef}
-          className={`grid gap-6 w-full ${view === 'grid' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}
+          className="w-full flex flex-col gap-12 md:gap-20 px-4 md:px-12"
+          style={{ paddingTop: '50px' }}
         >
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="w-full project-card" // Removed opacity-0 to prevent permanent invisibility
-            >
-              <Link href={project.link} className="block group w-full h-full">
-                <div 
-                  className={`relative w-full overflow-hidden ${project.color} shadow-sm transition-all duration-500 hover:shadow-xl group-hover:scale-[1.01] rounded-2xl ${view === 'list' ? 'aspect-[21/9]' : 'aspect-[4/3]'}`}
-                >
-                  
-                  {/* Image / Mockup Placeholder */}
-                  <div className="absolute inset-0">
-                     <Image 
-                       src={project.image} 
-                       alt={project.title}
-                       fill
-                       className="object-cover transition-transform duration-700 group-hover:scale-105"
-                     />
-                     {/* Overlay Gradient (Bottom) */}
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                  </div>
-
-                  {/* Text Content (Bottom Overlay) */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <h4 className={`font-medium text-white leading-tight mb-2 font-sans tracking-tight ${view === 'list' ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>
-                      {project.title}
-                    </h4>
-                    {/* Optional hover reveal details */}
-                    <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-300 opacity-0 group-hover:opacity-100">
-                       <p className="text-white/70 text-sm mt-2">{project.category}</p>
-                    </div>
-                  </div>
-
-                </div>
-              </Link>
-            </div>
+          {projects.map((project, index) => (
+             <div 
+               key={project.id}
+               className={`project-card relative w-full md:w-auto ${index % 2 === 0 ? 'md:self-start' : 'md:self-end'}`}
+               style={{
+                 marginTop: index !== 0 ? '-40px' : '0px', // Slight overlap or closer spacing if needed, but gap handles it mostly. Let's rely on gap. removed negative margin for now. 
+               }}
+             >
+               <ProjectCard
+                  {...project}
+                  className="w-full"
+                  style={{
+                    '--card-rotation': `${project.rotation}deg`,
+                  } as React.CSSProperties}
+                />
+             </div>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+
+
