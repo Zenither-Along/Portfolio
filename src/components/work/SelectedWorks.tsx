@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import RuledPaperBackground from '@/components/work/RuledPaperBackground';
 import EdgeFade from '@/components/work/EdgeFade';
 import ProjectCard from '@/components/work/ProjectCard';
+import ProjectAnnotations from '@/components/work/ProjectAnnotations';
 
 const projects = [
   {
@@ -54,15 +55,25 @@ export default function SelectedWorks() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".project-card", {
-        y: 15,
-        scale: 1.05,
-        rotation: 0, // Start straight, then tilt to final angle
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "back.out(1.2)", // "Place down" feel
-        clearProps: "transform, opacity, scale, y" 
+      // Animate each card individually based on scroll
+      const cards = gsap.utils.toArray('.project-card');
+      cards.forEach((card: any) => {
+        gsap.from(card, {
+          y: 80,
+          scale: 0.9,
+          opacity: 0,
+          rotation: 0, // Start straight, rotate to final CSS angle on scroll
+          duration: 1, // Logic handled by scrub
+          ease: "none", // Linear scrub
+          scrollTrigger: {
+            trigger: card,
+            start: "top 95%", // Start animating when card just enters view
+            end: "top 60%", // Finish when it's well inside
+            scrub: 1,
+            toggleActions: "play reverse play reverse"
+          },
+          clearProps: "transform, opacity, scale, y"
+        });
       });
     }, containerRef);
     return () => ctx.revert();
@@ -85,6 +96,9 @@ export default function SelectedWorks() {
         className="max-w-7xl mx-auto relative z-10 flex flex-col items-center" 
         style={{ width: '100%', maxWidth: '1100px', margin: '0 auto' }}
       >
+        {/* Decorative Annotations (Lines & Doodles) */}
+        <ProjectAnnotations />
+
         {/* Header Row */}
         <div 
           className="w-full flex flex-col items-start mb-12"

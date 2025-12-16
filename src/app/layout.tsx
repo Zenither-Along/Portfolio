@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/ui/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
@@ -32,10 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${inter.variable} ${instrumentSans.variable} ${playfairDisplay.variable} font-sans antialiased bg-[#FAFAFA] text-gray-900`}
       >
+        <SmoothScroll />
         <CustomCursor />
         {children}
       </body>
