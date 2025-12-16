@@ -1,0 +1,62 @@
+'use client';
+
+import { useRef, useLayoutEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface ExpertiseHeadlineProps {
+  text?: string;
+}
+
+export default function ExpertiseHeadline({ 
+  text = "Where design sensibility meets code to craft experiences that feel naturally right." 
+}: ExpertiseHeadlineProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const chars = textRef.current?.querySelectorAll('.reveal-text');
+      
+      if (chars) {
+        gsap.to(chars, {
+          color: '#1a1a1a',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "center 50%",
+            scrub: 0.5,
+          }
+        });
+      }
+    }, containerRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="flex flex-col items-center text-center">
+      <div 
+        ref={textRef}
+        className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl max-w-5xl leading-relaxed font-semibold"
+        style={{ fontFamily: 'var(--font-instrument)' }}
+      >
+        {text.split(" ").map((word, i) => (
+          <span key={i} className="whitespace-nowrap">
+            {word.split("").map((char, j) => (
+              <span 
+                key={j} 
+                className="reveal-text inline-block"
+                style={{ color: '#d1d5db' }}
+              >
+                {char}
+              </span>
+            ))}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
