@@ -69,7 +69,7 @@ function ToolCard({ name, icon }: Tool) {
       {/* Tool Name */}
       <span 
         className="text-xs font-medium text-gray-500 group-hover:text-gray-800 transition-colors duration-300 text-center"
-        style={{ marginTop: '8px' }}
+        style={{ marginTop: '8px', marginBottom: '20px'}}
       >
         {name}
       </span>
