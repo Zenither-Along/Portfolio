@@ -16,6 +16,7 @@ import {
   SiClerk,
   SiClaude,
   SiGooglegemini,
+  SiFlutter,
 } from 'react-icons/si';
 
 interface Tool {
@@ -38,12 +39,13 @@ const tools: Tool[] = [
   { name: 'Claude', icon: <SiClaude size={32} /> },
   { name: 'Gemini', icon: <SiGooglegemini size={32} /> },
   { name: 'Antigravity', icon: <Image src="/google-antigravity-logo.png" alt="Antigravity" width={32} height={32} style={{ filter: 'grayscale(100%)' }} /> },
+  { name: 'Flutter', icon: <SiFlutter size={32} /> },
 ];
 
 function ToolCard({ name, icon }: Tool) {
   return (
     <div 
-      className="flex-shrink-0 flex flex-col items-center justify-center group cursor-pointer"
+      className="shrink-0 flex flex-col items-center justify-center group cursor-pointer"
       style={{ 
         width: '100px',
         padding: '16px 0',
