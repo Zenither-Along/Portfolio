@@ -13,6 +13,7 @@ export default function ProfileBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const headerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -33,9 +34,18 @@ export default function ProfileBar() {
       }
     });
 
+    // Create scroll trigger to hide navbar when footer is visible
+    const footerTrigger = ScrollTrigger.create({
+      trigger: '#main-footer',
+      start: 'top bottom', // When top of footer hits bottom of viewport
+      onEnter: () => setIsVisible(false),
+      onLeaveBack: () => setIsVisible(true),
+    });
+
     return () => {
       window.removeEventListener('resize', checkDesktop);
       trigger.kill();
+      footerTrigger.kill();
     };
   }, []);
 
@@ -64,9 +74,10 @@ export default function ProfileBar() {
       ref={headerRef}
       initial={{ opacity: 0, y: -20 }}
       animate={{ 
-        opacity: 1, 
-        y: 0,
-        borderRadius: isOpen ? '24px' : '35px'
+        opacity: isVisible ? 1 : 0, 
+        y: isVisible ? 0 : -100,
+        borderRadius: isOpen ? '24px' : '35px',
+        pointerEvents: isVisible ? 'auto' : 'none'
       }}
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/60 backdrop-blur-md border border-white/40 shadow-sm overflow-hidden"

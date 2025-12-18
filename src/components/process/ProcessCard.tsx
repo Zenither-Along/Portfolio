@@ -9,41 +9,21 @@ interface ProcessCardProps {
 export default function ProcessCard({ step }: ProcessCardProps) {
   return (
     <div
-      className="process-card relative bg-white rounded-2xl p-8 shadow-lg border border-gray-200"
-      style={{
-        width: '380px',
-        maxWidth: '90vw',
-      }}
+      className="group grid grid-cols-2 md:flex md:flex-row md:justify-between md:items-start border-t border-gray-200 last:border-b transition-colors duration-300 hover:bg-gray-50/50"
+      style={{ padding: '32px 0' }}
     >
-      {/* Icon */}
-      <div
-        className="text-6xl mb-4"
-        style={{ lineHeight: 1 }}
-      >
-        {step.icon}
+      {/* Left: Number + Title */}
+      <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-12">
+        <span className="font-serif text-sm text-gray-400 font-medium">
+          {String(step.id).padStart(2, '0')}
+        </span>
+        <h3 className="text-xl md:text-2xl font-serif font-medium text-gray-900 group-hover:text-black transition-colors duration-300">
+          {step.title}
+        </h3>
       </div>
 
-      {/* Step Number */}
-      <div
-        className="text-sm font-medium text-gray-400 mb-2"
-        style={{ fontFamily: 'var(--font-sans)', letterSpacing: '0.05em' }}
-      >
-        STEP {String(step.id).padStart(2, '0')}
-      </div>
-
-      {/* Title */}
-      <h3
-        className="text-2xl md:text-3xl font-medium text-gray-900 mb-3"
-        style={{ fontFamily: 'var(--font-instrument)' }}
-      >
-        {step.title}
-      </h3>
-
-      {/* Description */}
-      <p
-        className="text-base text-gray-600 leading-relaxed"
-        style={{ fontFamily: 'var(--font-sans)' }}
-      >
+      {/* Right: Description */}
+      <p className="font-sans text-sm text-gray-500 max-w-md leading-relaxed text-right md:text-left group-hover:text-gray-800 transition-colors duration-300 col-span-2 md:col-span-1 mt-4 md:mt-0">
         {step.description}
       </p>
     </div>

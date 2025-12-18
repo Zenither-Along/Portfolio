@@ -6,13 +6,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface ExpertiseHeadlineProps {
+interface ProcessHeadlineProps {
   text?: string;
 }
 
-export default function ExpertiseHeadline({ 
-  text = "Where design sensibility meets code to craft experiences that feel naturally right." 
-}: ExpertiseHeadlineProps) {
+export default function ProcessHeadline({ 
+  text = "Great products begin with understanding, evolve through iteration, and succeed through thoughtful execution." 
+}: ProcessHeadlineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
