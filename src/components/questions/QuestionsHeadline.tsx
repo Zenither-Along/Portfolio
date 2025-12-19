@@ -41,7 +41,11 @@ export default function QuestionsHeadline({
       <div 
         ref={textRef}
         className="flex flex-wrap gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl max-w-5xl leading-relaxed font-semibold"
-        style={{ fontFamily: 'var(--font-instrument)' }}
+        style={{ 
+          fontFamily: 'var(--font-instrument)', 
+          paddingLeft: '20px', 
+          paddingRight: '20px' 
+        }}
       >
         {text.split(" ").map((word, i) => (
           <span key={i} className="whitespace-nowrap">

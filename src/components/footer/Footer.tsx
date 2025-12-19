@@ -17,7 +17,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="w-full text-left pt-8" style={{ paddingLeft: '20px' }}>
           <div className="text-gray-600 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
-            © 2024 Alongbar
+            © 2025 Alongbar
           </div>
         </div>
       </div>
