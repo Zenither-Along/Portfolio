@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useLayoutEffect } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ExpertiseHeadline from './ExpertiseHeadline';
@@ -24,12 +25,16 @@ export default function ExpertiseSection() {
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center gap-16">
         <ExpertiseHeadline />
         <div className="flex flex-col items-center gap-8 w-full">
-          <h2 
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.5 }}
             className="text-3xl md:text-3xl font-medium text-gray-900 w-full max-w-4xl"
             style={{ fontFamily: 'var(--font-instrument)', paddingLeft: '16px', paddingRight: '16px' }}
           >
             My Expertise
-          </h2>
+          </motion.h2>
           <ExpertiseList />
         </div>
         <div className="w-full py-12">

@@ -23,7 +23,11 @@ export default function FooterHeading({
   }, []);
 
   return (
-    <div 
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       className="flex flex-col gap-2"
       style={{ paddingLeft: '20px', paddingTop: '40px' }}
     >
@@ -63,6 +67,6 @@ export default function FooterHeading({
       >
         {line2}
       </h2>
-    </div>
+    </motion.div>
   );
 }

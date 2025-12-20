@@ -7,7 +7,7 @@ interface HeroSubtitleProps {
 }
 
 export default function HeroSubtitle({ 
-  text = "I craft elegant, performant web experiences that delight users and inspire creativity - along___br"
+  text = "I combine technical precision with elegant design to build web experiences that feel as good as they look."
 }: HeroSubtitleProps) {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },

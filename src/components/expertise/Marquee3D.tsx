@@ -38,7 +38,46 @@ const tools: Tool[] = [
   { name: 'Clerk', icon: <SiClerk size={32} /> },
   { name: 'Claude', icon: <SiClaude size={32} /> },
   { name: 'Gemini', icon: <SiGooglegemini size={32} /> },
-  { name: 'Antigravity', icon: <Image src="/google-antigravity-logo.png" alt="Antigravity" width={32} height={32} style={{ filter: 'grayscale(100%)' }} /> },
+  { 
+    name: 'Antigravity', 
+    icon: (
+      <div 
+        style={{ 
+          width: '32px', 
+          height: '32px', 
+          backgroundColor: 'currentColor',
+          maskImage: 'url("/google-antigravity-logo.png")',
+          WebkitMaskImage: 'url("/google-antigravity-logo.png")',
+          maskSize: 'contain',
+          WebkitMaskSize: 'contain',
+          maskRepeat: 'no-repeat',
+          WebkitMaskRepeat: 'no-repeat',
+          maskPosition: 'center',
+          WebkitMaskPosition: 'center'
+        }} 
+      />
+    ) 
+  },
+  { 
+    name: 'Cursor', 
+    icon: (
+      <div 
+        style={{ 
+          width: '32px', 
+          height: '32px', 
+          backgroundColor: 'currentColor',
+          maskImage: 'url("/cursor-logo.png")',
+          WebkitMaskImage: 'url("/cursor-logo.png")',
+          maskSize: 'contain',
+          WebkitMaskSize: 'contain',
+          maskRepeat: 'no-repeat',
+          WebkitMaskRepeat: 'no-repeat',
+          maskPosition: 'center',
+          WebkitMaskPosition: 'center'
+        }} 
+      />
+    ) 
+  },
   { name: 'Flutter', icon: <SiFlutter size={32} /> },
 ];
 

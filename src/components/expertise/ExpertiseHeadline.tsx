@@ -21,14 +21,21 @@ export default function ExpertiseHeadline({
       const chars = textRef.current?.querySelectorAll('.reveal-text');
       
       if (chars) {
+        // Set initial state
+        gsap.set(chars, { y: 20, opacity: 0 });
+
         gsap.to(chars, {
+          y: 0,
+          opacity: 1,
           color: '#1a1a1a',
-          stagger: 0.1,
+          stagger: 0.05,
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 80%",
-            end: "center 30%",
-            scrub: 0.5,
+            start: "top 85%",
+            end: "center 45%",
+            scrub: 1,
           }
         });
       }

@@ -65,6 +65,13 @@ export const BorderBeam = ({
           opacity: opacity,
           boxShadow: glowEffect,
           borderRadius: beamBorderRadius ? `${beamBorderRadius}px` : undefined,
+          // Enhanced GPU acceleration and smoothness optimizations
+          willChange: 'offset-distance',
+          transform: 'translate3d(0, 0, 0) translateZ(0)',
+          transformStyle: 'preserve-3d',
+          backfaceVisibility: 'hidden',
+          WebkitFontSmoothing: 'subpixel-antialiased',
+          imageRendering: 'crisp-edges',
           ...style,
         } as any}
         initial={{ offsetDistance: `${initialOffset}%` }}
@@ -78,6 +85,7 @@ export const BorderBeam = ({
           ease: "linear",
           duration: actualDuration,
           delay: -delay,
+          times: [0, 1], // Ensure even timing distribution
           ...transition,
         }}
       />

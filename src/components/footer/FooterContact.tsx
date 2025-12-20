@@ -1,15 +1,34 @@
 'use client';
 
-
+import { motion } from 'framer-motion';
 
 export default function FooterContact() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
-    <div 
+    <motion.div 
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
       className="flex flex-col md:flex-row gap-12 md:gap-48 pt-8 border-t border-gray-800"
       style={{ paddingLeft: '20px' }}
     >
       {/* Email */}
-      <div className="flex flex-col gap-2 text-left">
+      <motion.div variants={itemVariants} className="flex flex-col gap-2 text-left">
         <p className="text-gray-500 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
           Email
         </p>
@@ -20,15 +39,15 @@ export default function FooterContact() {
         >
           alongbar@example.com
         </a>
-      </div>
+      </motion.div>
 
       {/* Call Me */}
-      <div className="flex flex-col gap-2 text-left">
+      <motion.div variants={itemVariants} className="flex flex-col gap-2 text-left">
         <p className="text-gray-500 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
           Connect
         </p>
         <a 
-          href="mailto:alongbar@example.com"
+          href="/contact"
           className="text-white hover:text-gray-300 transition-colors flex items-center gap-2 group"
           style={{ fontFamily: 'var(--font-sans)' }}
         >
@@ -48,10 +67,10 @@ export default function FooterContact() {
             <path d="m12 5 7 7-7 7" />
           </svg>
         </a>
-      </div>
+      </motion.div>
 
       {/* Social */}
-      <div className="flex flex-col gap-2 text-left">
+      <motion.div variants={itemVariants} className="flex flex-col gap-2 text-left">
         <p className="text-gray-500 text-sm" style={{ fontFamily: 'var(--font-sans)' }}>
           Social
         </p>
@@ -101,7 +120,7 @@ export default function FooterContact() {
             </svg>
           </a>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

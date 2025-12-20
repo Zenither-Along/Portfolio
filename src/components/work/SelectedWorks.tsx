@@ -104,9 +104,9 @@ export default function SelectedWorks() {
           className="w-full flex flex-col items-start mb-12"
           style={{ paddingLeft: '20px', paddingRight: '20px' }}
         >
-          <h3 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">Featured Projects</h3>
+          <h3 className="text-3xl md:text-4xl font-serif text-gray-900 mb-6">Selected Entries</h3>
           <p className="text-gray-600 text-lg md:text-xl font-sans max-w-2xl">
-            A curated selection of projects that showcase my passion for design, development, and storytelling.
+            A chronicle of creative explorations and architectural builds, documented for the record.
           </p>
         </div>
 

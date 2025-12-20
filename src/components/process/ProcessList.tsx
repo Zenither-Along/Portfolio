@@ -1,13 +1,18 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { processSteps } from './processData';
 
 export default function ProcessList() {
   return (
     <div className="flex flex-col w-full max-w-4xl mx-auto" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
       {processSteps.map((step, index) => (
-        <div 
+        <motion.div 
           key={index} 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-5%" }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
           className="group grid grid-cols-2 md:flex md:flex-row md:justify-between md:items-center border-t border-gray-200 last:border-b transition-colors duration-300 hover:bg-gray-50/50"
           style={{ padding: '20px 0' }}
         >
@@ -25,7 +30,7 @@ export default function ProcessList() {
           <p className="font-sans text-sm text-gray-500 max-w-xs leading-relaxed text-right group-hover:text-gray-800 transition-colors duration-300">
             {step.description}
           </p>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

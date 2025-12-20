@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useLayoutEffect } from 'react';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -37,7 +38,14 @@ export default function QuestionsHeadline({
   }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col items-start">
+    <motion.div 
+      ref={containerRef} 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="flex flex-col items-start"
+    >
       <div 
         ref={textRef}
         className="flex flex-wrap gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl max-w-5xl leading-relaxed font-semibold"
@@ -61,6 +69,6 @@ export default function QuestionsHeadline({
           </span>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

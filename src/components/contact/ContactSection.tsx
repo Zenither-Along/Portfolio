@@ -9,7 +9,7 @@ export default function ContactSection() {
   // Marquee item content component
   const MarqueeItem = () => (
     <a
-      href="mailto:alongbar@example.com"
+      href="/contact"
       className="inline-flex items-center gap-4 mx-8 group hover:opacity-70 transition-opacity"
       style={{
         fontSize: 'clamp(2rem, 5vw, 4rem)',

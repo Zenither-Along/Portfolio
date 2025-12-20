@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { questions } from './questionsData';
 
 export default function QuestionsList() {
@@ -13,8 +14,12 @@ export default function QuestionsList() {
   return (
     <div className="flex flex-col w-full max-w-4xl mx-auto gap-8" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
       {questions.map((item, index) => (
-        <div 
+        <motion.div 
           key={index} 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-5%" }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
           className="group overflow-hidden transition-all duration-300"
         >
           {/* Question - Clickable */}
@@ -49,7 +54,7 @@ export default function QuestionsList() {
               {item.answer}
             </p>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

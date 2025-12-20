@@ -9,7 +9,7 @@ interface HeroCTAProps {
 
 export default function HeroCTA({ 
   text = "Get in touch",
-  href = "#contact"
+  href = "/contact"
 }: HeroCTAProps) {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -41,7 +41,7 @@ export default function HeroCTA({
       {text}
       {/* Arrow Icon */}
       <svg 
-        className="transition-transform duration-300 group-hover:-rotate-45" 
+        className="transition-transform duration-300 group-hover:-rotate-315" 
         style={{ width: '20px', height: '20px' }}
         fill="none" 
         stroke="currentColor" 
