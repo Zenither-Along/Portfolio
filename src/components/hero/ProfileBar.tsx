@@ -121,7 +121,7 @@ export default function ProfileBar() {
               <h3 className="text-sm font-bold text-gray-900 leading-tight group-hover/profile:text-black transition-colors">
                 Alongbar Brahma
               </h3>
-              <p className="text-xs text-gray-500">Web Developer, Student</p>
+              <p className="text-xs text-gray-500">Designer, Developer, Student</p>
             </div>
           </button>
 
@@ -143,6 +143,7 @@ export default function ProfileBar() {
                 <a
                   key={item}
                   href={
+                    item === 'Home' ? '/' :
                     item === 'Contact' ? '/contact' : 
                     item === 'Sanctuary' ? '/sanctuary' : 
                     item === 'Services' ? '/services' : 
@@ -210,6 +211,7 @@ export default function ProfileBar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 + index * 0.05 }}
                       href={
+                        item === 'Home' ? '/' :
                         item === 'Contact' ? '/contact' : 
                         item === 'Sanctuary' ? '/sanctuary' : 
                         item === 'Services' ? '/services' : 
