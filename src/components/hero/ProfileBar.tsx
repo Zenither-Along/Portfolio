@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+'use client';
+
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineAcademicCap, HiOutlineLocationMarker, HiOutlineSparkles } from 'react-icons/hi';
 import gsap from 'gsap';
@@ -6,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const navLinks = ['Home', 'Sanctuary', 'Services', 'Contact'];
+const navLinks = ['Home', 'Projects', 'Services', 'Contact'];
 
 export default function ProfileBar() {
   const [expandedType, setExpandedType] = useState<'menu' | 'about' | null>(null);
@@ -16,36 +18,39 @@ export default function ProfileBar() {
   const headerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
+  // Resize listener
   useEffect(() => {
-    // Check if desktop viewport
     const checkDesktop = () => {
       setIsDesktop(window.innerWidth >= 768);
     };
     checkDesktop();
     window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
 
-    // Create scroll trigger that updates progress from 0 to 1
-    const trigger = ScrollTrigger.create({
-      start: 'top top',
-      end: '+=300', // Over 300px of scroll
-      onUpdate: (self) => {
-        setScrollProgress(self.progress);
+  // GSAP Scroll Logic
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Progress Tracker
+      ScrollTrigger.create({
+        start: 'top top',
+        end: '+=300',
+        onUpdate: (self) => setScrollProgress(self.progress)
+      });
+
+      // 2. Hide on Footer
+      const footerElement = document.getElementById('main-footer');
+      if (footerElement) {
+        ScrollTrigger.create({
+          trigger: footerElement,
+          start: 'top bottom',
+          onEnter: () => setIsVisible(false),
+          onLeaveBack: () => setIsVisible(true),
+        });
       }
-    });
+    }, headerRef); // Scope to header (optional but good practice, though triggers are global usually)
 
-    // Create scroll trigger to hide navbar when footer is visible
-    const footerTrigger = ScrollTrigger.create({
-      trigger: '#main-footer',
-      start: 'top bottom', // When top of footer hits bottom of viewport
-      onEnter: () => setIsVisible(false),
-      onLeaveBack: () => setIsVisible(true),
-    });
-
-    return () => {
-      window.removeEventListener('resize', checkDesktop);
-      trigger.kill();
-      footerTrigger.kill();
-    };
+    return () => ctx.revert();
   }, []);
 
   // Handle click outside to close expanded bar
@@ -68,8 +73,8 @@ export default function ProfileBar() {
   // Calculate values based on scroll progress (only on desktop)
   const progress = isDesktop ? scrollProgress : 0;
   
-  // Width: 768px -> 280px (interpolate) - min width fits profile + hamburger
-  const maxWidth = 768 - (488 * progress); // 768 to 280
+  // Width: 768px -> 350px (interpolate) - min width fits profile + hamburger
+  const maxWidth = 768 - (418 * progress); // 768 to 350
   const width = `min(calc(100% - 32px), ${maxWidth}px)`;
   
   // Gap between nav items: 32px -> 8px
@@ -100,7 +105,7 @@ export default function ProfileBar() {
         pointerEvents: isVisible ? 'auto' : 'none'
       }}
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/60 backdrop-blur-md border border-white/40 shadow-sm overflow-hidden"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] bg-white/60 backdrop-blur-md border border-white/40 shadow-sm overflow-hidden"
       style={{ width, maxWidth: `${maxWidth}px` }}
     >
       <div className="flex flex-col w-full">
@@ -145,7 +150,7 @@ export default function ProfileBar() {
                   href={
                     item === 'Home' ? '/' :
                     item === 'Contact' ? '/contact' : 
-                    item === 'Sanctuary' ? '/sanctuary' : 
+                    item === 'Projects' ? '/projects' : 
                     item === 'Services' ? '/services' : 
                     `#${item.toLowerCase()}`
                   }
@@ -213,7 +218,7 @@ export default function ProfileBar() {
                       href={
                         item === 'Home' ? '/' :
                         item === 'Contact' ? '/contact' : 
-                        item === 'Sanctuary' ? '/sanctuary' : 
+                        item === 'Projects' ? '/projects' : 
                         item === 'Services' ? '/services' : 
                         `#${item.toLowerCase()}`
                       }

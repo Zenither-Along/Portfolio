@@ -7,27 +7,21 @@ const plans = [
     name: "Basic",
     price: "₹4,999",
     description: "Essential web presence for individuals.",
-    features: ["Landing Page / One Page", "Mobile Responsive Design", "Basic SEO Optimization", "Contact Form Integration"],
-  },
-  {
-    name: "Pro",
-    price: "₹25,999",
-    description: "Comprehensive solution for growing businesses.",
-    features: ["Multi-page Business Site", "CMS (Admin Dashboard)", "Interactive Animations", "E-commerce Functionality", "Advanced SEO & Analytics"],
-    highlight: true,
+    features: ["Landing Page / One Page Website", "Mobile Responsive Design", "Contact Form Integration", "Fast Delivery (2-3 Days)"],
   },
   {
     name: "Custom",
-    price: "₹100k+",
-    description: "Full-scale development for big and serious projects.",
-    features: ["SaaS / Web Application", "AI Chatbot Integration", "Cross-Platform Mobile App", "Scalable Backend Architecture", "Priority Support & Maintenance"],
+    price: "Let's Talk",
+    description: "Tailored solutions for complex requirements.",
+    features: ["Full Stack Web Applications", "E-commerce & SaaS Platforms", "AI Chatbot & Automation", "Cross-Platform Mobile Apps", "Scalable Backend Architecture"],
+    highlight: true,
   },
 ];
 
 export default function PricingSection() {
   return (
     <div 
-      className="w-full max-w-6xl mx-auto flex flex-col items-center"
+      className="w-full max-w-5xl mx-auto flex flex-col items-center"
       style={{ 
         marginTop: 'clamp(8rem, 15vh, 12rem)', 
         marginBottom: 'clamp(6rem, 10vh, 10rem)',
@@ -45,7 +39,7 @@ export default function PricingSection() {
         Pricing
       </h2>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         {plans.map((plan, index) => (
           <div 
             key={index} 
