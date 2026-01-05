@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineAcademicCap, HiOutlineLocationMarker, HiOutlineSparkles } from 'react-icons/hi';
 import gsap from 'gsap';
@@ -11,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const navLinks = ['Home', 'Projects', 'Services', 'Contact'];
 
 export default function ProfileBar() {
+  const router = useRouter(); 
+  const pathname = usePathname();
   const [expandedType, setExpandedType] = useState<'menu' | 'about' | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -90,8 +93,30 @@ export default function ProfileBar() {
   const paddingY = 12 - (2 * progress);
   const paddingX = 20 - (4 * progress);
 
+  // Close 'about' section when scrolling starts (keep menu working)
+  useEffect(() => {
+    if (progress > 0.1 && expandedType === 'about') {
+      setExpandedType(null);
+    }
+  }, [progress, expandedType]);
+
   const toggleExpanded = (type: 'menu' | 'about') => {
+    // Only allow expanding when bar is at max size (no scroll progress)
+    if (progress > 0.1 && type === 'about') return;
     setExpandedType(expandedType === type ? null : type);
+  };
+
+  const handleProfileClick = () => {
+    // If shrunk (scrolled on desktop), navigate home or scroll top
+    if (progress > 0.1) {
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        router.push('/');
+      }
+    } else {
+      toggleExpanded('about');
+    }
   };
 
   return (
@@ -116,11 +141,15 @@ export default function ProfileBar() {
         >
           {/* Profile Info - Clickable */}
           <button 
-            onClick={() => toggleExpanded('about')}
+            onClick={handleProfileClick}
             className="flex items-center gap-3 shrink-0 group/profile text-left focus:outline-hidden cursor-pointer"
           >
             <div className="w-10 h-10 rounded-full bg-gray-300 overflow-hidden relative shrink-0 ring-2 ring-transparent group-hover/profile:ring-gray-200 transition-all">
-              <div className="absolute inset-0 bg-linear-to-tr from-gray-400 to-gray-200" />
+              <img 
+                src="/profile-pic.png" 
+                alt="Profile" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="text-left whitespace-nowrap">
               <h3 className="text-sm font-bold text-gray-900 leading-tight group-hover/profile:text-black transition-colors">
@@ -231,37 +260,52 @@ export default function ProfileBar() {
                 </nav>
               ) : (
                 <div 
-                  className="flex flex-col gap-6 text-left"
+                  className="flex gap-6"
                   style={{ padding: '24px 24px 40px' }}
                 >
-                  <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-sm font-sans">
-                    I'm Alongbar Brahma, a web developer and student focused on creating clean, interactive experiences. I love blending design and code to build products that feel alive and intuitive.
-                  </p>
-                  
-                  {/* Quick Points */}
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <HiOutlineAcademicCap className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm font-medium">Pursuing BCA (Bachelor of Computer Applications)</span>
+                  {/* Left Side - Text Content */}
+                  <div className="flex flex-col gap-6 text-left flex-1">
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-sm font-sans">
+                      I'm Alongbar Brahma, a web developer and student focused on creating clean, interactive experiences. I love blending design and code to build products that feel alive and intuitive.
+                    </p>
+                    
+                    {/* Quick Points */}
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3 text-gray-700">
+                        <HiOutlineAcademicCap className="w-5 h-5 text-gray-400" />
+                        <span className="text-sm font-medium">Pursuing BCA (Bachelor of Computer Applications)</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-gray-700">
+                        <HiOutlineLocationMarker className="w-5 h-5 text-gray-400" />
+                        <span className="text-sm font-medium">Based in North East India</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-gray-700">
+                        <HiOutlineSparkles className="w-5 h-5 text-gray-400" />
+                        <span className="text-sm font-medium">Focused on interactive UI & GSAP animations</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <HiOutlineLocationMarker className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm font-medium">Based in North East India</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <HiOutlineSparkles className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm font-medium">Focused on interactive UI & GSAP animations</span>
+
+                    <div className="flex items-center justify-start gap-4 mt-2">
+                      <a 
+                        href="/contact" 
+                        onClick={() => setExpandedType(null)}
+                        className="text-xs font-bold text-gray-900 hover:underline tracking-tight"
+                      >
+                        LET'S CONNECT
+                      </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-start gap-4 mt-2">
-                    <a 
-                      href="/contact" 
-                      onClick={() => setExpandedType(null)}
-                      className="text-xs font-bold text-gray-900 hover:underline tracking-tight"
-                    >
-                      LET'S CONNECT
-                    </a>
+                  {/* Right Side - Profile Image (Desktop Only) */}
+                  <div 
+                    className="hidden md:block shrink-0"
+                    style={{ width: '300px', height: '280px' }}
+                  >
+                    <img 
+                      src="/profile-pic.png" 
+                      alt="Alongbar Brahma" 
+                      className="w-full h-full object-cover rounded-2xl"
+                    />
                   </div>
                 </div>
               )}

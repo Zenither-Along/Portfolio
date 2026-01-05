@@ -9,7 +9,7 @@ interface ExpertiseItem {
   skills: string[];
   description: string;
   detailedDescription: string;
-  imageGradient: string; // Using gradients for now as premium placeholders
+  image: string;
 }
 
 interface ExpertiseListProps {
@@ -22,28 +22,28 @@ const defaultExpertiseData: ExpertiseItem[] = [
     skills: ["Figma", "Design Systems", "Prototyping", "User Flow"],
     description: "Structuring visual chaos into intuitive clarity.",
     detailedDescription: "Bridging the gap between user needs and business goals. Employing user-centric design principles to create interfaces that are visually stunning, intuitive, and accessible—ensuring a seamless journey from start to finish.",
-    imageGradient: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)"
+    image: "/uiux_image.jpg"
   },
   {
     category: "Web Development",
     skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
     description: "Crafting polished, performant web experiences.",
     detailedDescription: "Building modern, scalable web applications that are as beautiful as they are functional. Leveraging the latest technologies to ensure pixel-perfect execution, rapid performance, and seamless user accessibility.",
-    imageGradient: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)"
+    image: "/web_image.jpg"
   },
   {
     category: "App Development",
     skills: ["Flutter", "Dart", "iOS", "Android"],
     description: "Constructing seamless, cross-platform mobile experiences.",
     detailedDescription: "Creating high-performance mobile applications that feel truly native. Transforming ideas into intuitive iOS and Android experiences with smooth animations and functional robustness.",
-    imageGradient: "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)"
+    image: "/app_image.jpg"
   },
   {
     category: "AI Integration",
     skills: ["LLM Workflows", "Cursor", "Generative Art", "Prompt Engineering"],
     description: "Augmenting human creativity with machine intelligence.",
     detailedDescription: "Leveraging artificial intelligence to automate workflows, generate unique assets, and build intelligent interfaces. Integrating bleeding-edge AI solutions to keep products ahead of the curve.",
-    imageGradient: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
+    image: "/ai_integretion_image.jpg"
   }
 ];
 
@@ -104,10 +104,15 @@ export default function ExpertiseList({ data = defaultExpertiseData }: Expertise
                 <div className="flex flex-col md:flex-row gap-6"
                 style={{ paddingTop: '20px' }}>
                   {/* Image Area */}
-                  <div 
-                    className="w-full md:w-5/12 h-44 md:h-44 rounded-lg shadow-sm"
-                    style={{ background: item.imageGradient}}
-                  />
+                  <div className="w-full md:w-5/12 h-44 md:h-44 relative rounded-lg overflow-hidden shadow-sm">
+                    <Image
+                      src={item.image}
+                      alt={item.category}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                    />
+                  </div>
                   
                   {/* Details Area */}
                   <div className="w-full md:w-7/12 flex flex-col justify-between">

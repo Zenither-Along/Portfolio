@@ -63,7 +63,7 @@ export default function ProjectCard({
               src={image} 
               alt={title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
             />
           </div>
           
@@ -76,24 +76,15 @@ export default function ProjectCard({
               paddingRight: '20px', 
             }}
           >
-           {/* Project Icon - Collapses on hover */}
-           <div className="relative w-[44px] h-[44px] rounded-full overflow-hidden shrink-0 border-2 border-white/20 transition-all duration-300 group-hover:w-0 group-hover:opacity-0 group-hover:border-0">
-              <Image 
-                src={image} 
-                alt="icon" 
-                width={44} 
-                height={44} 
-                className="object-cover"
-              />
-           </div>
 
-            {/* Project Name - Slides left as icon disappears */}
-            <span className="font-sans font-bold text-black text-lg md:text-xl tracking-tight truncate flex-1 ml-3 group-hover:ml-4 transition-all duration-300 text-left">
+
+            {/* Project Name */}
+            <span className="font-sans font-bold text-black text-lg md:text-xl tracking-tight truncate flex-1 ml-0 transition-all duration-300 text-left">
               {title}
             </span>
 
-            {/* Arrow Button - Appears on right on hover */}
-            <div className="w-0 opacity-0 group-hover:w-[44px] group-hover:opacity-100 transition-all duration-300 relative shrink-0">
+            {/* Arrow Button - Always visible */}
+            <div className="w-[44px] opacity-100 transition-all duration-300 relative shrink-0">
               <div className="w-[44px] h-[44px] bg-white rounded-full flex items-center justify-center shadow-sm">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

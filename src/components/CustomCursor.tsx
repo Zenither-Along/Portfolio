@@ -56,7 +56,7 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 rounded-full pointer-events-none z-[9999] border-2 ${
+      className={`fixed top-0 left-0 rounded-full pointer-events-none z-[99999] border-2 ${
         isHovering 
           ? 'w-16 h-16 border-purple-400 bg-purple-400/10' 
           : 'w-10 h-10 border-gray-600/60'

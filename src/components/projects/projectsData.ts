@@ -15,42 +15,42 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 4,
-    title: "The Silent Witch",
+    title: "PrepX - Path architect",
     category: "Corporate / Branding",
-    image: "/test-image.jpg",
+    image: "/1project.png",
     tapeColors: { topLeft: '#F97316', topRight: '#F97316' }, // Orange
     pillColor: '#50ff50', // Neon Green
     rotation: 2.2,
-    link: "#"
+    link: "/projects/prepx"
   },
   {
     id: 5,
-    title: "Kotion Perfume",
-    category: "Product Design",
-    image: "/test-image.jpg", 
-    tapeColors: { topLeft: '#A855F7', topRight: '#A855F7' }, // Purple
+    title: "Scoozi - Artisan Café",
+    category: "Web Development",
+    image: "/2project.jpg", 
+    tapeColors: { topLeft: '#A855F7', topRight: '#A855F7' }, // Purple - Keeping for now, or match Sage? Let's keep existing and maybe update later if requested.
     pillColor: '#94deff', // Light Blue
     rotation: -3,
-    link: "#"
+    link: "/projects/scoozi"
   },
   {
     id: 6,
-    title: "Urban Architecture",
-    category: "Photography",
-    image: "/test-image.jpg",
-    tapeColors: { topLeft: '#3B82F6', topRight: '#3B82F6' }, // Blue
-    pillColor: '#ffd9b6', // Peach
+    title: "Nexboard",
+    category: "Productivity",
+    image: "/3project.jpg",
+    tapeColors: { topLeft: '#3B82F6', topRight: '#2563EB' }, // Blue
+    pillColor: '#e0f2fe', // Light Blue
     rotation: 2.2,
-    link: "#"
+    link: "/projects/nexboard"
   },
   {
-    id: 7,
-    title: "Geometric Shapes",
-    category: "3D Art",
-    image: "/test-image.jpg",
-    tapeColors: { topLeft: '#EF4444', topRight: '#EF4444' }, // Red
-    pillColor: '#e0e0e0', // Gray
-    rotation: -2.3,
-    link: "#"
+    id: 8,
+    title: "Protocol V.1.0",
+    category: "UI Engineering",
+    image: "/4project.jpg",
+    tapeColors: { topLeft: '#4d7c0f', topRight: '#a3e635' }, // Earthy Green/Lime for Solarpunk
+    pillColor: '#dcfce7', // Light Green
+    rotation: -2,
+    link: "/projects/protocol"
   }
 ];
